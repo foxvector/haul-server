@@ -1,24 +1,74 @@
-# README
+# JapanHaul Rails
+Managing backend API for Japan Haul frontend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Stacks
+* Ruby 2.3.x
+* Rails 5.1.2
+* MySQL2
+* Rspec
+* Puma
 
-Things you may want to cover:
+## Installation
+Clone the repository
+```
+$ git clone git@github.com:movefast-llc/japanhaul-rails.git
+```
 
-* Ruby version
+Initialize a new gemset then install bundler
+```
+$ gem install bundler
+```
 
-* System dependencies
+Install dependencies
+```
+bundle install
+```
 
-* Configuration
+Ask for secrets.yml
+```
+$ vim config/secrets.yml
+```
 
-* Database creation
+Install MySQL
+```
+$ brew install mysql
+```
 
-* Database initialization
+## Setup
+Setup database
+```
+$ bundle exec rake db:setup
+```
 
-* How to run the test suite
+## Testing
+Install phantomjs for headless browser testing
+```
+For Mac OSX,
+$ brew install phantomjs
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Run the tests
+```
+$ bundle exec rspec spec
+```
 
-* Deployment instructions
+## Protocol
+1. Ask someone on the team to add you to Jira.
+2. Login to the TokyoTreat Jira account here: https://tokyotreat.atlassian.net/
+3. Look for cards in the current sprint that are assigned to you.
+4. When you start a card, move the card to In Progress
+5. When opening a pull request, move the card to the Code Review list and ask in Slack for a review.
+6. Once your pull request passes CI, ask someone to review your code.
+7. Once someone has reviewed your code and approved to merge it to master, you can then deploy it to staging and move the card to the Acceptance Testing list.
+8. When the card is in Acceptance Testing it should be assigned to someone on the product side to review.
+9. The person accepting the feature will then leave an "Approved" comment and assign the card back or give feedback to work on.
+10. Finally, once acceptance testing is complete, let everyone know you are about to deploy to production and deploy
 
-* ...
+## Start-Up Everything
+```
+$ rails s
+```
+
+## Deployment
+Staging: `cap staging deploy`
+Production: `cap production deploy`
