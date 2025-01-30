@@ -36,8 +36,8 @@ group :development, :test do
   gem 'rspec-rails','~> 3.5.0'
   # binding.pry
   gem 'pry-rails'
-  # factory girl
-  gem 'factory_girl_rails'
+  # factory girl/bot
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -59,7 +59,10 @@ group :test do
 end
 
 # HAML integration
-gem 'haml-rails', '~> 0.9'
+gem 'haml-rails', '~> 1.0'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Shopify APP
+gem 'shopify_app'
