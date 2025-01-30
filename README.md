@@ -1,5 +1,5 @@
 # JapanHaul Rails
-Managing backend API for Japan Haul frontend
+Managing backend API for Japan Haul frontend.
 
 ## Stacks
 * Ruby 2.3.x
