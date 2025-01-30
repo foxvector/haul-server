@@ -1,0 +1,19 @@
+- content_for :javascript do
+  :javascript
+    ShopifyApp.ready(function(){
+      ShopifyApp.Bar.initialize({ title: "Home" });
+    });
+%h2 Products
+%ul
+  - @products.each do |product|
+    %li= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top"
+%hr/
+%h2 Webhooks
+- if @webhooks.present?
+  %ul
+    - @webhooks.each do |webhook|
+      %li
+        = webhook.topic
+        \: #{webhook.address}
+- else
+  %p This app has not created any webhooks for this Shop. Add webhooks to your ShopifyApp initializer if you need webhooks
