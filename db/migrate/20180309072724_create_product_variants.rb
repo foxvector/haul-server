@@ -9,6 +9,8 @@ class CreateProductVariants < ActiveRecord::Migration[5.1]
       t.string     :sku
       t.integer    :position
       t.integer    :grams
+      t.integer    :inventory_quantity
+      t.string     :inventory_policy
 
       t.timestamps
     end

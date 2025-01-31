@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20180309072724) do
     t.string "sku"
     t.integer "position"
     t.integer "grams"
+    t.integer "inventory_quantity"
+    t.string "inventory_policy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_product_variants_on_product_id"
@@ -38,6 +40,7 @@ ActiveRecord::Schema.define(version: 20180309072724) do
     t.text "featured_image_url"
     t.decimal "price_min", precision: 10, scale: 2
     t.decimal "compare_price_min", precision: 10, scale: 2
+    t.boolean "available"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
