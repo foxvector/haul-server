@@ -58,6 +58,15 @@ group :test do
   gem 'poltergeist'
 end
 
+# Deployment dependencies
+group :development do
+  gem 'capistrano-rails', '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano3-puma', '1.2.1', require: false
+  gem 'capistrano-sidekiq', require: false
+end
+
 # HAML integration
 gem 'haml-rails', '~> 1.0'
 
