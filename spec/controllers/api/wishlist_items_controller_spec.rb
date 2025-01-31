@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe WishlistItem do
-  describe '.add' do
+describe Api::WishlistItemsController do
+  describe '#create' do
     it 'adds the item on the wishlist'
   end
 
-  describe '.remove' do
+  describe '#destroy' do
     it 'removes the item on the wishlist'
   end
 end
