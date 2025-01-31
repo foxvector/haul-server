@@ -5,6 +5,10 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'capybara/rails'
+require 'capybara/rspec'
+require 'capybara/poltergeist'
+require 'sidekiq/testing'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -54,4 +58,31 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include FactoryBot::Syntax::Methods
+
+  Sidekiq::Testing.inline!
+
+  Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 300)
+  end
+
+  Capybara.javascript_driver = :poltergeist
+
+  # Clean up the database
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do |example|
+    Capybara.current_driver = :selenium if example.metadata[:selenium]
+
+    DatabaseCleaner.strategy = example.metadata[:js] || example.metadata[:selenium] ? :truncation : :transaction
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
