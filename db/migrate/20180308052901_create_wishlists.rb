@@ -3,10 +3,13 @@ class CreateWishlists < ActiveRecord::Migration[5.1]
     create_table :wishlists do |t|
       t.belongs_to :shop, foreign_key: true
       t.string :name
+      t.string :token
       t.string :wishlist_type
       t.string :shopify_customer_id
 
       t.timestamps
     end
+
+    add_index :wishlists, :token
   end
 end
