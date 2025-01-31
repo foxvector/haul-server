@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20180309072724) do
     t.bigint "product_id"
     t.string "remote_id"
     t.string "title"
-    t.decimal "price", precision: 10
-    t.decimal "compare_at_price", precision: 10
+    t.decimal "price", precision: 10, scale: 2
+    t.decimal "compare_at_price", precision: 10, scale: 2
     t.string "sku"
     t.integer "position"
     t.integer "grams"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20180309072724) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_product_variants_on_product_id"
+    t.index ["remote_id"], name: "index_product_variants_on_remote_id"
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -44,6 +45,7 @@ ActiveRecord::Schema.define(version: 20180309072724) do
     t.boolean "available"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["remote_id"], name: "index_products_on_remote_id"
     t.index ["shop_id"], name: "index_products_on_shop_id"
   end
 

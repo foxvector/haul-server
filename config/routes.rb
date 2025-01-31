@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :wishlists do
       resources :wishlist_items, path: 'items'
     end
+
+    resources :products, only: [:index]
   end
 
   root :to => 'home#index'
