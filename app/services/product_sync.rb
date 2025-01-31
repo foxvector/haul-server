@@ -9,6 +9,7 @@ class ProductSync
   def call
     if existing_product
       existing_product.update!(product_params)
+      existing_product
     else
       shop.products.create!(product_params)
     end

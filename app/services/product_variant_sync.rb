@@ -7,7 +7,11 @@ class ProductVariantSync
   end
 
   def call
-
+    if existing_variant
+      existing_variant.update!(variant_params)
+    else
+      product.product_variants.create!(variant_params)
+    end
   end
 
   private
