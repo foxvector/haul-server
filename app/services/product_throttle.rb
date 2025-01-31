@@ -22,13 +22,21 @@ class ProductThrottle
       puts "Doing page #{page}/#{total_pages_count}..."
       products = ShopifyAPI::Product.find(:all, params: { limit: 250, page: page })
 
-      products.each do |product|
-        ProductSync.new(product).call
-      end
+      sync_products(products)
     end
   end
 
   private
+
+  def sync_products(products)
+    products.each do |product|
+      model = ProductSync.new(product).call
+
+      product.variants.each do |variant|
+        ProductVariantSync.new(model, variant).call
+      end
+    end
+  end
 
   def total_pages_count
     (total_product_count / 250.0).ceil
