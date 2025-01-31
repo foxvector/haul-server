@@ -12,6 +12,7 @@ class CreateProducts < ActiveRecord::Migration[5.1]
       t.text    :featured_image_url
       t.decimal :price_min, precision: 10, scale: 2
       t.decimal :compare_price_min, precision: 10, scale: 2
+      t.boolean :available
 
       t.timestamps
     end
