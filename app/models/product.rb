@@ -3,8 +3,5 @@ class Product < ApplicationRecord
 
   has_many :product_variants, dependent: :destroy
 
-  validates :title, :vendor, :product_type,
-            :handle, :price_min, :compare_price_min, presence: true
-
   validates :remote_id, uniqueness: { scope: :shop_id }
 end

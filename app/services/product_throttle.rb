@@ -4,6 +4,8 @@ class ProductThrottle
   attr_reader :shop
 
   def initialize(shop)
+    @shop = shop
+
     access = ShopifyAPI::Session.new(shop.shopify_domain, shop.shopify_token)
 
     ShopifyAPI::Base.activate_session(access)

@@ -1,5 +1,6 @@
 :pidfile: tmp/pids/sidekiq.pid
 :concurrency: 5
 :queues:
+  - shopify_sync
   - default
   - mailers
