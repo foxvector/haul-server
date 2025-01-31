@@ -7,6 +7,8 @@ Managing backend API for Japan Haul frontend.
 * MySQL2
 * Rspec
 * Puma
+* Redis
+* Sidekiq
 
 ## Installation
 Clone the repository
@@ -27,6 +29,11 @@ bundle install
 Ask for secrets.yml
 ```
 $ vim config/secrets.yml
+```
+
+Install redis
+```
+Follow this link: https://redis.io/topics/quickstart
 ```
 
 Install MySQL
@@ -66,6 +73,8 @@ $ bundle exec rspec spec
 
 ## Start-Up Everything
 ```
+$ redis-server
+$ bundle exec sidekiq -C config/sidekiq.yml
 $ rails s
 ```
 
