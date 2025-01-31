@@ -1,5 +1,5 @@
 ShopifyApp.configure do |config|
-  website_url = Rails.application.secrets.website_url
+  website_url = Rails.application.secrets.website_url.to_s
 
   config.application_name = 'JapanHaul App'
   config.api_key = Rails.application.secrets.shopify_api_key
