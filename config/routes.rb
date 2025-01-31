@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :wishlists
+    resources :wishlists do
+      resources :wishlist_items, path: 'items'
+    end
   end
 
   root :to => 'home#index'

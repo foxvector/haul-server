@@ -3,8 +3,7 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
-    - application_name = ShopifyApp.configuration.application_name
-    %title= application_name
+    %title Japan Haul - Application
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application', "data-turbolinks-track" => true
     = csrf_meta_tags
@@ -14,14 +13,15 @@
         %main{:role => "main"}
           = yield
     = render 'layouts/flash_messages'
-    %script{:src => "https://cdn.shopify.com/s/assets/external/app.js?#{Time.now.strftime('%Y%m%d%H')}"}
+    %script{ src: "https://cdn.shopify.com/s/assets/external/app.js?#{Time.now.strftime('%Y%m%d%H')}"}
     :javascript
       ShopifyApp.init({
         apiKey: "#{ShopifyApp.configuration.api_key}",
-        shopOrigin: "#{"https://\#{ @shop_session.url }" if @shop_session}",
+        shopOrigin: "#{@shop_session.try(:url)}",
         debug: #{Rails.env.development? ? 'true' : 'false'},
         forceRedirect: true
       });
+
     - if content_for?(:javascript)
-      #ContentForJavascript{"data-turbolinks-temporary" => ""}
+      #ContentForJavascript
         = yield :javascript
