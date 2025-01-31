@@ -9,12 +9,17 @@ class ProductVariantSync
   def call
     if existing_variant
       existing_variant.update!(variant_params)
+      existing_variant
     else
       product.product_variants.create!(variant_params)
     end
   end
 
   private
+
+  def existing_variant
+    @existing_variant ||= product.product_variants.find_by(remote_id: variant.id)
+  end
 
   def variant_params
     {
