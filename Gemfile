@@ -66,3 +66,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Shopify APP
 gem 'shopify_app'
+
+# Background Job
+gem 'sidekiq'
+gem 'sidekiq-failures'
