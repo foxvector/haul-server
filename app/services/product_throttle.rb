@@ -1,6 +1,14 @@
 class ProductThrottle
   CYCLE = 0.5
 
+  attr_reader :shop
+
+  def initialize(shop)
+    access = ShopifyAPI::Session.new(shop.shopify_domain, shop.shopify_token)
+
+    ShopifyAPI::Base.activate_session(access)
+  end
+
   def call
     # Initializing
     start_time = Time.now
@@ -30,7 +38,7 @@ class ProductThrottle
 
   def sync_products(products)
     products.each do |product|
-      model = ProductSync.new(product).call
+      model = ProductSync.new(shop, product).call
 
       product.variants.each do |variant|
         ProductVariantSync.new(model, variant).call

@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20180309072724) do
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "shop_id"
     t.string "remote_id"
     t.string "title"
     t.text "body_html"
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 20180309072724) do
     t.boolean "available"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_products_on_shop_id"
   end
 
   create_table "shops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -75,6 +77,7 @@ ActiveRecord::Schema.define(version: 20180309072724) do
   end
 
   add_foreign_key "product_variants", "products"
+  add_foreign_key "products", "shops"
   add_foreign_key "wishlist_items", "wishlists"
   add_foreign_key "wishlists", "shops"
 end

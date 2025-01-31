@@ -1,7 +1,8 @@
 class ProductSync
-  attr_reader :product, :variants
+  attr_reader :shop, :product, :variants
 
   def initialize(shop, product)
+    @shop     = shop
     @product  = product
     @variants = product.variants
   end
@@ -30,7 +31,7 @@ class ProductSync
       product_type:       product.product_type,
       handle:             product.handle,
       published_scope:    product.published_scope,
-      featured_image_url: product.image.try(:src)
+      featured_image_url: product.image.try(:src),
       tags:               product.tags,
       price_min:          price_min,
       compare_price_min:  compare_price_min,
@@ -47,7 +48,7 @@ class ProductSync
   def compare_price_min
     variant = variants.sort_by(&:compare_at_price).first
 
-    variant.compare_at_price if compare_at_price.first
+    variant.compare_at_price if variant.present?
   end
 
   def available?
