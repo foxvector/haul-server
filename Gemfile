@@ -70,3 +70,6 @@ gem 'shopify_app'
 # Background Job
 gem 'sidekiq'
 gem 'sidekiq-failures'
+
+# JSON serializer
+gem 'jsonapi-rails'
